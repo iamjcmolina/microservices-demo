@@ -8,7 +8,6 @@ public class User {
     private String name;
     private String lastName;
     private Boolean enabled;
-    private String ejecucion;
 
     public User() {
     }
@@ -68,17 +67,5 @@ public class User {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
-    }
-
-    public String getEjecucion() {
-        return ejecucion;
-    }
-
-    public void setEjecucion(String ejecucion) {
-        this.ejecucion = ejecucion;
-    }
-
-    public Character getCharacterEjecucion(){
-        return ejecucion.charAt(0);
     }
 }

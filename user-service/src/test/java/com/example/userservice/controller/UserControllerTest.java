@@ -1,6 +1,5 @@
-package com.example.userservice.service.impl;
+package com.example.userservice.controller;
 
-import com.example.userservice.dao.UserDao;
 import com.example.userservice.entity.User;
 import com.example.userservice.service.UserService;
 import org.junit.Before;
@@ -8,29 +7,33 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
-import java.util.List;
 
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserServiceImplTest {
+public class UserControllerTest {
 
-    private UserDao userDao;
+    private MockMvc mockMvc;
+
     private UserService userService;
+    private UserController userController;
 
     private User goodUser;
 
     @Before
     public void setup(){
-        userDao = mock(UserDao.class);
-        userService = new UserServiceImpl(userDao);
+        userService = mock(UserService.class);
+        userController = new UserController(userService);
+
+        mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
 
         goodUser = new User(
                 1L,
@@ -43,13 +46,13 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void findAll() {
-        when(userDao.findAll()).thenReturn(Arrays.asList(goodUser));
+    public void findAll() throws Exception {
+        when(userService.findAll()).thenReturn(Arrays.asList(goodUser));
 
-        List<User> users = userService.findAll();
+        mockMvc.perform(get("/users"))
+                .andExpect(status().isOk());
 
-        assertThat(users, notNullValue());
-        assertThat(users.size(), is(1));
+        verify(userService, times(1)).findAll();
     }
 
     @Test
