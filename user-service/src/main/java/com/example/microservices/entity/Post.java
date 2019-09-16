@@ -1,4 +1,4 @@
-package com.example.microservices.dao.domain;
+package com.example.microservices.entity;
 
 public class Post {
 

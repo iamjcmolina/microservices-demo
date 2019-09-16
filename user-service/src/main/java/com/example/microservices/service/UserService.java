@@ -1,6 +1,6 @@
 package com.example.microservices.service;
 
-import com.example.microservices.dao.domain.User;
+import com.example.microservices.entity.User;
 
 import java.util.List;
 

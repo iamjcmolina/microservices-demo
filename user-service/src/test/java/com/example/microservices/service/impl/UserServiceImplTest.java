@@ -1,7 +1,7 @@
 package com.example.microservices.service.impl;
 
 import com.example.microservices.dao.UserDao;
-import com.example.microservices.dao.domain.User;
+import com.example.microservices.entity.User;
 import com.example.microservices.service.UserService;
 import org.junit.Before;
 import org.junit.Test;

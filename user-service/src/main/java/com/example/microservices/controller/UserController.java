@@ -1,6 +1,6 @@
 package com.example.microservices.controller;
 
-import com.example.microservices.dao.domain.User;
+import com.example.microservices.entity.User;
 import com.example.microservices.service.UserService;
 
 import org.springframework.web.bind.annotation.*;
